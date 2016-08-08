@@ -1,0 +1,56 @@
+{
+  "name": "ad-channel-got",
+  "version": "0.0.1",
+  "description": "Channel proxy using got which caches the channel configurations to communicate with AppDirect. ",
+  "main": "src/index.js",
+  "scripts": {
+    "coverage": "istanbul cover _mocha -- -R spec",
+    "esdoc": "esdoc -c .esdoc",
+    "lint": "eslint src test",
+    "test": "mocha test -u bdd -R spec --ui bdd --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaligan/ad-channel-got.git"
+  },
+  "keywords": [
+    "appdirect",
+    "channel",
+    "proxy",
+    "got"
+  ],
+  "homepage": "https://github.com/kaligan/ad-channel-got#readme",
+  "author": {
+    "name": "AppDirect",
+    "url": "https://www.appdirect.com"
+  },
+  "contributors": [
+    {
+      "name": "Matt Nicholson",
+      "email": "matt.nicholson@appdirect.com"
+    },
+    {
+      "name": "Rahul Bir",
+      "email": "rahul.bir@appdirect.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/kaligan/ad-channel-got/issues"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^2.0.0",
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb-base": "^5.0.0",
+    "eslint-plugin-import": "^1.12.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "got": "^6.3.0",
+    "node-uuid": "^1.4.7",
+    "oauth-1.0a": "^1.0.1",
+    "oauth-sign": "^0.8.2",
+    "qs": "^6.2.1"
+  }
+}

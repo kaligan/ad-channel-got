@@ -1,3 +1,5 @@
+'use strict';
+
 const AppDirect = require('../src/index');
 const assert = require('assert');
 const chai = require('chai');
@@ -19,6 +21,26 @@ describe('AppDirect ChannelConfiguration Tests', function rootTests() {
   const options = {
     channel
   };
+
+  before((done) => {
+    const appdirect = new AppDirect();
+    appdirect
+      .request('/oauth/token', {
+        method: 'post',
+        auth: `${channel.consumerKey}:${channel.consumerSecret}`,
+        body: {
+          username: process.env.USERNAME,
+          password: process.env.PASSWORD,
+          grant_type: 'password'
+        },
+        channel
+      })
+      .then(tokens => {
+        channel.token = tokens.body.access_token;
+        done();
+      })
+      .catch(err => done(err));
+  });
 
   describe('constructor', () => {
     it('Should work for a null constructor', (done) => {
@@ -42,7 +64,6 @@ describe('AppDirect ChannelConfiguration Tests', function rootTests() {
     it('Should return a got stream for the url /api/marketplace/v1/listing use a token', (done) => {
       const appdirect = new AppDirect();
       const tokenOptions = Object.assign({}, options);
-      tokenOptions.channel.token = process.env.TOKEN;
 
       appdirect.stream('/api/marketplace/v1/listing?count=1', tokenOptions)
         .on('response', response => {
@@ -72,7 +93,6 @@ describe('AppDirect ChannelConfiguration Tests', function rootTests() {
     it('Should return a got request promise for the url /api/marketplace/v1/listing use a token', (done) => {
       const appdirect = new AppDirect();
       const tokenOptions = Object.assign({}, options);
-      tokenOptions.channel.token = process.env.TOKEN;
 
       const promise = appdirect.request('/api/marketplace/v1/listing?count=1', tokenOptions);
       promise.should.be.a('promise');
